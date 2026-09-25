@@ -16,7 +16,7 @@
 </section>
 <section style="max-width:1180px;margin:0 auto;padding:64px 24px 0;box-sizing:border-box">
 <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:28px"><h2 style="font-size:clamp(32px,4vw,40px);margin:0">Everyday bakes</h2><span style="font-style:italic;font-size:18px;color:var(--text-muted)">Order at least three days ahead.</span></div>
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));gap:24px">
 <sc-for list="{{ cards }}" as="p" hint-placeholder-count="6"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.ProductCard" logo-base="assets/logo/" name="{{ p.name }}" price="{{ p.priceLabel }}" unit="{{ p.unit }}" description="{{ p.desc }}" badge="{{ p.badge }}" badge-tone="{{ p.tone }}" onAdd="{{ p.onAdd }}" hint-size="100%,400px"></x-import></sc-for>
 </div>
 </section>
@@ -26,7 +26,7 @@
 <div style="flex:1 1 420px;min-width:0"><div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--text-muted)">Custom orders</div><h2 style="font-size:clamp(32px,4vw,40px);margin:12px 0 8px">Made for your day.</h2><p style="margin:0;font-size:19px;max-width:560px">These are starting prices. The final price depends on the design. Please give at least two weeks' notice.</p></div>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" onClick="{{ goCustom }}" hint-size="230px,56px">Start a custom request</x-import>
 </div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 56px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px 56px">
 <div>
 <div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-accent);padding-bottom:6px;border-bottom:1px solid var(--line-soft);margin-bottom:6px">Celebration cakes</div>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="6-inch, two layers" price="from $55" description="Serves 8–10" hint-size="100%,64px"></x-import>
@@ -42,9 +42,9 @@
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Dessert table" price="from $150" description="A mix for 25 guests or more" hint-size="100%,64px"></x-import>
 </div>
 </div>
-<div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line-hair);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px 56px;font-size:18px">
-<div><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted)">Cake flavors</span><div style="font-style:italic;margin-top:6px">Vanilla bean, dark chocolate, lemon, strawberry, brown butter spice, carrot</div></div>
-<div><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted)">Frostings &amp; fillings</span><div style="font-style:italic;margin-top:6px">Vanilla or honey buttercream, cream cheese, chocolate fudge, lemon curd, berry jam</div></div>
+<div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line-hair);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:20px 56px;font-size:18px">
+<div><span style="font-family:var(--font-caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted)">Cake flavors</span><div style="font-style:italic;margin-top:6px">Vanilla bean, dark chocolate, lemon, strawberry, brown butter spice, carrot</div></div>
+<div><span style="font-family:var(--font-caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted)">Frostings &amp; fillings</span><div style="font-style:italic;margin-top:6px">Vanilla or honey buttercream, cream cheese, chocolate fudge, lemon curd, berry jam</div></div>
 </div>
 </div>
 </section>

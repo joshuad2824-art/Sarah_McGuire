@@ -312,7 +312,7 @@
     if (e.target.closest('[data-smb-admin]:not([data-smb-badge])')) return;
     var r = root();
     if (!r || !r.contains(e.target)) return;
-    if (e.target.closest('input,textarea,select')) return;
+    if (e.target.closest('input,textarea,select,[data-edit-passthrough]')) return;
     e.preventDefault();
     e.stopPropagation();
     var slot = e.target.closest('[data-smb-slot]');
