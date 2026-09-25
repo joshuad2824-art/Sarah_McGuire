@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<div data-screen-label="Menu & prices">
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 0;box-sizing:border-box">
+<div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--text-muted)">Menu &amp; prices</div>
+<h1 style="font-size:clamp(44px,5.5vw,62px);line-height:1.05;font-weight:500;letter-spacing:-.01em;margin:16px 0 14px;color:var(--text-strong)">A few everyday bakes, and the rest made to order.</h1>
+<p style="margin:0;font-size:21px;max-width:640px">Add everyday bakes to your box, or start a custom request. You'll hear back within a day, and nothing is charged until the order is confirmed.</p>
+</section>
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 0;box-sizing:border-box">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:28px"><h2 style="font-size:clamp(32px,4vw,40px);margin:0">Everyday bakes</h2><span style="font-style:italic;font-size:18px;color:var(--text-muted)">Order at least three days ahead.</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px">
+<sc-for list="{{ cards }}" as="p" hint-placeholder-count="6"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.ProductCard" logo-base="assets/logo/" name="{{ p.name }}" price="{{ p.priceLabel }}" unit="{{ p.unit }}" description="{{ p.desc }}" badge="{{ p.badge }}" badge-tone="{{ p.tone }}" onAdd="{{ p.onAdd }}" hint-size="100%,400px"></x-import></sc-for>
+</div>
+</section>
+<section style="max-width:1180px;margin:80px auto 0;padding:0 24px;box-sizing:border-box">
+<div style="background:var(--surface-sunken);border-radius:14px;padding:clamp(32px,5vw,56px)">
+<div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 32px;margin-bottom:32px">
+<div style="flex:1 1 420px;min-width:0"><div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--text-muted)">Custom orders</div><h2 style="font-size:clamp(32px,4vw,40px);margin:12px 0 8px">Made for your day.</h2><p style="margin:0;font-size:19px;max-width:560px">These are starting prices. The final price depends on the design. Please give at least two weeks' notice.</p></div>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" onClick="{{ goCustom }}" hint-size="230px,56px">Start a custom request</x-import>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 56px">
+<div>
+<div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-accent);padding-bottom:6px;border-bottom:1px solid var(--line-soft);margin-bottom:6px">Celebration cakes</div>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="6-inch, two layers" price="from $55" description="Serves 8–10" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="8-inch, three layers" price="from $75" description="Serves 16–20" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Two-tier" price="from $180" description="Serves about 40" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Smash cake" price="$30" description="4-inch, for a first birthday" hint-size="100%,64px"></x-import>
+</div>
+<div>
+<div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-accent);padding-bottom:6px;border-bottom:1px solid var(--line-soft);margin-bottom:6px">Cookies &amp; cupcakes</div>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Decorated sugar cookies" price="from $42" description="Per dozen, hand-iced to your theme" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Custom cupcakes" price="from $40" description="Per dozen, your flavors & colors" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Mini cupcakes" price="$30" description="Two dozen" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.MenuItem" name="Dessert table" price="from $150" description="A mix for 25 guests or more" hint-size="100%,64px"></x-import>
+</div>
+</div>
+<div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line-hair);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px 56px;font-size:18px">
+<div><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted)">Cake flavors</span><div style="font-style:italic;margin-top:6px">Vanilla bean, dark chocolate, lemon, strawberry, brown butter spice, carrot</div></div>
+<div><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted)">Frostings &amp; fillings</span><div style="font-style:italic;margin-top:6px">Vanilla or honey buttercream, cream cheese, chocolate fudge, lemon curd, berry jam</div></div>
+</div>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;go&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(page:string,opts?:{custom?:boolean})=&gt;void&quot;},&quot;add&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(id:string)=&gt;void&quot;},&quot;items&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;}}">
+class Component extends DCLogic{
+  renderVals(){
+    const go=this.props.go||(()=>{}),add=this.props.add||(()=>{});
+    const cards=(this.props.items||[]).map(p=>({...p,priceLabel:'$'+p.price,onAdd:()=>add(p.id)}));
+    return {cards,goCustom:()=>go('order',{custom:true})};
+  }
+}
+</script>
+</body>
+</html>

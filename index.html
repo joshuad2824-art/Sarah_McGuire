@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sarah McGuire Baked Goods</title>
+<meta name="description" content="Cakes, cookies and pies, made by hand in Midtown Tulsa. Custom celebration cakes, decorated cookies and everyday bakes, made to order.">
+<link rel="icon" type="image/png" href="assets/logo/mark-pecan.png">
+<style>/* Webfonts — Google Fonts, self-hosted (latin subset).
+   Cormorant Garamond — headers & body (brand font, exact).
+   IM Fell English SC — subheaders / tracked caps (replaces Bodoni FLF; letterpress small caps echo the distressed wordmark).
+   Ms Madi — accent script (replaces Amsterdam Four; monoline signature like the logo's "Baked Goods"). */
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-display:swap;src:url("assets/fonts/cormorant-garamond-italic.woff2") format('woff2');}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-display:swap;src:url("assets/fonts/cormorant-garamond-italic.woff2") format('woff2');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/cormorant-garamond.woff2") format('woff2');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:swap;src:url("assets/fonts/cormorant-garamond.woff2") format('woff2');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:600;font-display:swap;src:url("assets/fonts/cormorant-garamond.woff2") format('woff2');}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:700;font-display:swap;src:url("assets/fonts/cormorant-garamond.woff2") format('woff2');}
+@font-face{font-family:'IM Fell English SC';font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/im-fell-english-sc.woff2") format('woff2');}
+@font-face{font-family:'Ms Madi';font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/ms-madi.woff2") format('woff2');}
+
+/* Sarah McGuire Baked Goods — color tokens
+   The six named brand colors are exact from the Brand Guide.
+   Tints/shades are derived (oklch-adjacent steps) for UI states. */
+:root{
+  /* Brand palette (exact) */
+  --southern-pecan:#7B5A43;
+  --woodland-olive:#8C8F6B;
+  --creamed-butter:#F8F2E7;
+  --honey-amber:#E2C17D;
+  --moonlit-lavender:#C7C4CF;
+  --dusty-rose:#C7A6A1;
+
+  /* Pecan ramp — primary ink */
+  --pecan-50:#F4EDE6;--pecan-100:#E9DDD1;--pecan-200:#D6C3B2;--pecan-300:#B89C86;--pecan-400:#9A7B64;
+  --pecan-500:#7B5A43;--pecan-600:#684B37;--pecan-700:#553D2D;--pecan-800:#412E22;--pecan-900:#2E2018;
+  /* Olive ramp */
+  --olive-50:#F2F2EA;--olive-100:#E4E5D6;--olive-200:#C9CBB1;--olive-300:#ADB08E;--olive-500:#8C8F6B;--olive-600:#74775A;--olive-700:#5C5F47;--olive-800:#44463A;
+  /* Cream / paper ramp — surfaces */
+  --cream-0:#FFFDF9;--cream-50:#FCF8F1;--cream-100:#F8F2E7;--cream-200:#F1E7D6;--cream-300:#E8DAC4;--cream-400:#D9C7AB;
+  /* Honey */
+  --honey-100:#F6EBD2;--honey-300:#ECD7A6;--honey-500:#E2C17D;--honey-700:#A8843F;
+  /* Rose */
+  --rose-100:#F1E6E3;--rose-300:#DCC4C0;--rose-500:#C7A6A1;--rose-700:#95706B;
+  /* Lavender */
+  --lavender-100:#EEEDF1;--lavender-300:#DAD8E0;--lavender-500:#C7C4CF;--lavender-700:#7F7A8E;
+  /* Kraft — packaging neutral seen on boxes/bags in brand mockup (derived) */
+  --kraft:#C9A67C;
+
+  /* ---- Semantic aliases ---- */
+  --bg-page:var(--creamed-butter);
+  --bg-paper:var(--cream-50);
+  --surface-card:var(--cream-0);
+  --surface-sunken:var(--cream-200);
+  --surface-inverse:var(--southern-pecan);
+  --surface-olive:var(--woodland-olive);
+  --surface-rose:var(--dusty-rose);
+  --surface-honey:var(--honey-100);
+
+  --text-strong:var(--pecan-800);
+  --text-body:var(--pecan-700);
+  --text-brand:var(--southern-pecan);
+  --text-muted:var(--pecan-500);
+  --text-subtle:var(--pecan-400);   /* large/decorative only */
+  --text-on-dark:var(--creamed-butter);
+  --text-accent:var(--olive-700);
+
+  --line-hair:var(--cream-300);
+  --line-soft:var(--pecan-200);
+  --line-strong:var(--southern-pecan);
+
+  --action-primary:var(--southern-pecan);
+  --action-primary-hover:var(--pecan-600);
+  --action-primary-press:var(--pecan-700);
+  --action-secondary:var(--woodland-olive);
+  --action-secondary-hover:var(--olive-600);
+  --focus-ring:var(--honey-500);
+
+  --status-success:var(--olive-600);--status-success-bg:var(--olive-100);
+  --status-warning:var(--honey-700);--status-warning-bg:var(--honey-100);
+  --status-error:#A35A50;--status-error-bg:var(--rose-100);
+  --status-info:var(--lavender-700);--status-info-bg:var(--lavender-100);
+
+  --overlay-scrim:rgba(46,32,24,.42);
+}
+
+/* Typography — Headers & body: Cormorant Garamond. Subheaders: IM Fell English SC. Accent script: Ms Madi. */
+:root{
+  --font-serif:'Cormorant Garamond','Cormorant',Garamond,'Times New Roman',serif;
+  --font-caps:'IM Fell English SC','IM Fell English',Garamond,serif;
+  --font-script:'Ms Madi','Snell Roundhand',cursive;
+
+  --font-display:var(--font-serif);
+  --font-heading:var(--font-serif);
+  --font-subhead:var(--font-caps);
+  --font-body:var(--font-serif);
+  --font-accent:var(--font-script);
+
+  /* Scale (Cormorant runs small — body sits at 19px) */
+  --fs-display:72px;--fs-h1:56px;--fs-h2:42px;--fs-h3:32px;--fs-h4:24px;
+  --fs-lead:23px;--fs-body:19px;--fs-small:16px;--fs-caption:14px;
+  --fs-eyebrow:13px;--fs-script:48px;
+
+  --fw-regular:400; /* @kind font */
+  --fw-medium:500; /* @kind font */
+  --fw-semibold:600; /* @kind font */
+  --fw-bold:700; /* @kind font */
+  --lh-tight:1.05; /* @kind font */
+  --lh-heading:1.15; /* @kind font */
+  --lh-body:1.55; /* @kind font */
+  --lh-loose:1.75; /* @kind font */
+
+  --ls-display:-0.01em; /* @kind font */
+  --ls-heading:0; /* @kind font */
+  --ls-body:0.005em; /* @kind font */
+  --ls-eyebrow:0.32em; /* @kind font */
+  --ls-button:0.22em; /* @kind font */
+}
+
+:root{
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;
+  --space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;
+  --container-max:1180px;--container-narrow:720px;--gutter:24px;
+  --control-h-sm:36px;--control-h-md:46px;--control-h-lg:56px;
+}
+
+/* Radii, borders, shadows, motion. Paper-and-kraft feel: soft corners, warm low shadows. */
+:root{
+  --radius-xs:2px;--radius-sm:4px;--radius-md:8px;--radius-lg:14px;--radius-xl:24px;--radius-pill:999px;--radius-round:50%;
+  --radius-control:var(--radius-sm);--radius-card:var(--radius-md);
+
+  --border-hair:1px solid var(--line-hair);
+  --border-soft:1px solid var(--line-soft);
+  --border-strong:1px solid var(--line-strong);
+
+  /* Shadows are pecan-tinted, never grey */
+  --shadow-1:0 1px 2px rgba(65,46,34,.06),0 1px 1px rgba(65,46,34,.04);
+  --shadow-2:0 2px 6px rgba(65,46,34,.07),0 8px 20px -8px rgba(65,46,34,.12);
+  --shadow-3:0 4px 10px rgba(65,46,34,.08),0 20px 44px -16px rgba(65,46,34,.22);
+  --shadow-focus:0 0 0 3px rgba(226,193,125,.6);
+
+  --ease-out:cubic-bezier(.22,.61,.36,1); /* @kind other */
+  --ease-in-out:cubic-bezier(.65,0,.35,1); /* @kind other */
+  --dur-fast:140ms; /* @kind other */
+  --dur-base:220ms; /* @kind other */
+  --dur-slow:420ms; /* @kind other */
+}
+
+/* Light element defaults so plain HTML picks up the brand */
+html{background:var(--bg-page);color:var(--text-body);font-family:var(--font-body);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+body{margin:0}
+h1,h2,h3,h4{font-family:var(--font-heading);color:var(--text-strong);font-weight:var(--fw-medium);line-height:var(--lh-heading);margin:0;text-wrap:balance}
+p{text-wrap:pretty}
+a{color:var(--southern-pecan);text-decoration:underline;text-decoration-color:var(--pecan-300);text-underline-offset:3px}
+a:hover{color:var(--pecan-700);text-decoration-color:currentColor}
+::selection{background:var(--honey-300);color:var(--pecan-900)}
+
+</style>
+
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="support.js"></script>
+</head>
+<body>
+
+<x-dc>
+<!-- @template name="Bakery website" description="Sarah McGuire Baked Goods site: home, menu & prices, about, pickup & FAQ, contact, order request" -->
+<helmet><script src="design-system.js"></script><style>html{scroll-behavior:auto}body{margin:0;background:var(--bg-page)}a{color:var(--southern-pecan)}a:hover{color:var(--pecan-700)}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:var(--bg-page);color:var(--text-body);font-family:var(--font-body)">
+<header style="position:sticky;top:0;z-index:30;background:rgba(248,242,231,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line-hair)">
+<sc-if value="{{ showAnnouncement }}" hint-placeholder-val="{{ true }}"><div style="background:var(--olive-700);color:var(--creamed-butter);text-align:center;font-size:17px;padding:8px 16px;line-height:1.35">Custom cakes need about two weeks' notice. Everyday bakes, three days.</div></sc-if>
+<div style="max-width:1180px;margin:0 auto;padding:18px 24px 0;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px">
+<div></div>
+<button sc-camel-on-click="{{ goHome }}" aria-label="Sarah McGuire Baked Goods, home" style="background:none;border:none;cursor:pointer;padding:0;display:flex"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Logo" variant="wordmark" base="assets/logo/" width="{{ 210 }}" hint-size="210px,52px"></x-import></button>
+<div style="display:flex;justify-content:flex-end"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.IconButton" icon="shopping-bag" label="Your box" badge="{{ boxBadge }}" sc-camel-on-click="{{ goOrder }}" hint-size="40px,40px"></x-import></div>
+</div>
+<nav style="max-width:1180px;margin:0 auto;padding:10px 24px 12px;box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:center;column-gap:36px;row-gap:4px">
+<sc-for list="{{ nav }}" as="l" hint-placeholder-count="4">
+<sc-if value="{{ l.active }}"><button sc-camel-on-click="{{ l.onClick }}" style="background:none;border:none;cursor:pointer;padding:6px 0;font-family:var(--font-caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-strong);border-bottom:1px solid var(--southern-pecan)">{{ l.label }}</button></sc-if>
+<sc-if value="{{ l.inactive }}" hint-placeholder-val="{{ true }}"><button sc-camel-on-click="{{ l.onClick }}" style="background:none;border:none;cursor:pointer;padding:6px 0;font-family:var(--font-caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid transparent" style-hover="color:var(--text-strong)">{{ l.label }}</button></sc-if>
+</sc-for>
+</nav>
+</header>
+<main style="flex:1">
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}"><dc-import name="SiteHome" go="{{ go }}" add="{{ add }}" items="{{ everyday }}" hero-style="{{ heroStyle }}" offer-delivery="{{ offerDelivery }}" hint-size="100%,1800px"></dc-import></sc-if>
+<sc-if value="{{ isMenu }}"><dc-import name="SiteMenu" go="{{ go }}" add="{{ add }}" items="{{ everyday }}" hint-size="100%,1600px"></dc-import></sc-if>
+<sc-if value="{{ isAbout }}"><dc-import name="SiteAbout" go="{{ go }}" hint-size="100%,1000px"></dc-import></sc-if>
+<sc-if value="{{ isPickup }}"><dc-import name="SitePickup" go="{{ go }}" offer-delivery="{{ offerDelivery }}" hint-size="100%,1400px"></dc-import></sc-if>
+<sc-if value="{{ isContact }}"><dc-import name="SiteContact" go="{{ go }}" hint-size="100%,900px"></dc-import></sc-if>
+<sc-if value="{{ isOrder }}"><dc-import name="SiteOrder" go="{{ go }}" items="{{ everyday }}" box="{{ box }}" set-qty="{{ setQty }}" clear-box="{{ clearBox }}" start-custom="{{ startCustom }}" offer-delivery="{{ offerDelivery }}" hint-size="100%,1400px"></dc-import></sc-if>
+</main>
+<footer style="background:var(--southern-pecan);color:var(--creamed-butter);margin-top:96px">
+<div style="max-width:1180px;margin:0 auto;padding:56px 24px 32px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:36px">
+<div><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Logo" color="cream" base="assets/logo/" width="{{ 190 }}" hint-size="190px,130px"></x-import></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:var(--font-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:10px">Order</div>
+<button sc-camel-on-click="{{ goMenu }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left" style-hover="text-decoration:underline">Menu &amp; prices</button>
+<button sc-camel-on-click="{{ goOrder }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left" style-hover="text-decoration:underline">Request an order</button>
+<button sc-camel-on-click="{{ goPickup }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left" style-hover="text-decoration:underline">Pickup &amp; FAQ</button></div>
+<div><div style="font-family:var(--font-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:14px">Pickup</div><div style="font-size:18px;line-height:1.6">Midtown Tulsa, Oklahoma<br>Thursday – Saturday<br>10am – 6pm</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:var(--font-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:10px">Say hello</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:18px;padding:3px 0"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="mail" size="{{ 18 }}" hint-size="18px,18px"></x-import><span>hello@sarahmcguirebakes.com</span></div>
+<div style="display:flex;align-items:center;gap:10px;font-size:18px;padding:3px 0"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="instagram" size="{{ 18 }}" hint-size="18px,18px"></x-import><span>@sarahmcguirebakes</span></div>
+<button sc-camel-on-click="{{ goContact }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px">Send a message</button></div>
+</div>
+<div style="max-width:1180px;margin:0 auto;padding:18px 24px 28px;box-sizing:border-box;border-top:1px solid rgba(248,242,231,.22);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;font-size:16px"><span>© 2026 Sarah McGuire Baked Goods · Tulsa, Oklahoma</span><span style="font-family:var(--font-script);font-size:32px;line-height:.8">made by hand</span></div>
+</footer>
+<sc-if value="{{ toast }}"><div style="position:fixed;left:0;right:0;bottom:28px;z-index:50;display:flex;justify-content:center;padding:0 16px;pointer-events:none"><div style="pointer-events:auto"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Toast" tone="success" action="View box" sc-camel-on-action="{{ goOrder }}" sc-camel-on-close="{{ hideToast }}" hint-size="320px,56px">{{ toast }}</x-import></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;showAnnouncement&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Site&quot;},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;photo&quot;,&quot;logo&quot;],&quot;default&quot;:&quot;photo&quot;,&quot;tsType&quot;:&quot;'photo'|'logo'&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;offerDelivery&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Ordering&quot;}}">
+// Everyday menu — edit names, prices and units here. Custom-order pricing lives in SiteMenu.dc.html.
+const EVERYDAY=[
+{id:'bbcc',name:'Brown Butter Chocolate Chip',price:24,unit:'dozen',desc:'Dark chocolate chunks, flaky sea salt',badge:'Bestseller',tone:'rose'},
+{id:'snick',name:'Snickerdoodles',price:22,unit:'dozen',desc:'Rolled twice in cinnamon sugar'},
+{id:'rolls',name:'Cinnamon Rolls',price:30,unit:'half dozen',desc:'Brown sugar swirl, cream cheese icing'},
+{id:'pecan',name:'Honey Pecan Pie',price:34,unit:'9-inch pie',desc:'Oklahoma pecans, all-butter crust',badge:'Seasonal',tone:'olive'},
+{id:'apple',name:'Lattice Apple Pie',price:32,unit:'9-inch pie',desc:'Tart apples, brown sugar, cinnamon'},
+{id:'banana',name:'Banana Bread',price:14,unit:'loaf',desc:'Very ripe bananas, crackly sugar top'}
+];
+class Component extends DCLogic{
+  state={page:'home',box:{},toast:null,startCustom:false};
+  go=(page,opts)=>{this.setState({page,startCustom:!!(opts&&opts.custom),toast:null});window.scrollTo(0,0);};
+  add=(id)=>{this.setState(s=>({box:{...s.box,[id]:(s.box[id]||0)+1},toast:'Added to your box'}));clearTimeout(this.t);this.t=setTimeout(()=>this.setState({toast:null}),3500);};
+  setQty=(id,n)=>this.setState(s=>{const b={...s.box};if(n<=0)delete b[id];else b[id]=n;return{box:b};});
+  clearBox=()=>this.setState({box:{}});
+  componentWillUnmount(){clearTimeout(this.t);}
+  renderVals(){
+    const p=this.state.page;
+    const count=Object.values(this.state.box).reduce((a,b)=>a+b,0);
+    const nav=[['menu','Menu & Prices'],['pickup','Pickup & FAQ'],['about','About'],['contact','Contact']].map(([id,label])=>({label,active:p===id,inactive:p!==id,onClick:()=>this.go(id)}));
+    return {
+      nav,go:this.go,add:this.add,setQty:this.setQty,clearBox:this.clearBox,
+      everyday:EVERYDAY,box:this.state.box,startCustom:this.state.startCustom,
+      boxBadge:count||undefined,toast:this.state.toast,hideToast:()=>this.setState({toast:null}),
+      isHome:p==='home',isMenu:p==='menu',isAbout:p==='about',isPickup:p==='pickup',isContact:p==='contact',isOrder:p==='order',
+      goHome:()=>this.go('home'),goMenu:()=>this.go('menu'),goOrder:()=>this.go('order'),goPickup:()=>this.go('pickup'),goContact:()=>this.go('contact'),
+      showAnnouncement:this.props.showAnnouncement??true,
+      heroStyle:this.props.heroStyle??'photo',
+      offerDelivery:this.props.offerDelivery??true
+    };
+  }
+}
+</script>
+
+</body></html>
