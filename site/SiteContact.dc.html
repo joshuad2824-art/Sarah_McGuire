@@ -15,14 +15,14 @@
 <h1 style="font-size:clamp(44px,5.5vw,62px);line-height:1.05;font-weight:500;letter-spacing:-.01em;margin:16px 0 16px;color:var(--text-strong)">Say hello.</h1>
 <p style="margin:0 0 32px;font-size:21px;max-width:420px">Questions about an order, a date, or an idea for a cake? Send a note. I usually reply within a day.</p>
 <div style="display:flex;flex-direction:column;gap:16px;font-size:19px">
-<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="mail" size="{{ 20 }}" hint-size="20px,20px"></x-import><a href="mailto:hello@sarahmcguirebakes.com">hello@sarahmcguirebakes.com</a></div>
+<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="mail" size="{{ 20 }}" hint-size="20px,20px"></x-import><a href="mailto:hello@sarahmcguirebakes.com" style="display:inline-block;padding:8px 0;overflow-wrap:anywhere">hello@sarahmcguirebakes.com</a></div>
 <div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="instagram" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>@sarahmcguirebakes</span></div>
 <div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="map-pin" size="{{ 20 }}" hint-size="20px,20px"></x-import><span>Midtown Tulsa, Oklahoma. Pickup only, no storefront.</span></div>
 </div>
 </div>
 <div style="flex:1.2 1 420px;min-width:0;background:var(--cream-0);border-radius:14px;box-shadow:var(--shadow-2);padding:clamp(28px,4vw,40px)">
 <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:20px">
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Your name" onChange="{{ setName }}" error="{{ nameError }}" hint-size="100%,78px"></x-import><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Email" type="email" onChange="{{ setEmail }}" error="{{ emailError }}" hint-size="100%,78px"></x-import></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:20px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Your name" onChange="{{ setName }}" error="{{ nameError }}" hint-size="100%,78px"></x-import><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Email" type="email" onChange="{{ setEmail }}" error="{{ emailError }}" hint-size="100%,78px"></x-import></div>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Select" label="About" options="{{ topics }}" value="{{ topic }}" onChange="{{ setTopic }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Message" multiline="{{ true }}" rows="{{ 5 }}" onChange="{{ setMsg }}" error="{{ msgError }}" hint-size="100%,170px"></x-import>
 <div><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" disabled="{{ sending }}" onClick="{{ send }}" hint-size="180px,56px">{{ sendLabel }}</x-import></div>

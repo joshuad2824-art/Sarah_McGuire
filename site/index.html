@@ -154,6 +154,30 @@ a{color:var(--southern-pecan);text-decoration:underline;text-decoration-color:va
 a:hover{color:var(--pecan-700);text-decoration-color:currentColor}
 ::selection{background:var(--honey-300);color:var(--pecan-900)}
 
+/* ---- Screen sizes: phone, tablet, desktop, large monitor ---- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img{max-width:100%}
+.site-footer-grid{grid-template-columns:1.1fr 1fr 1fr 1.3fr}
+/* Tablets: two-column footer; stacked photos become landscape instead of very tall */
+@media (max-width:900px){
+  .site-footer-grid{grid-template-columns:1fr 1fr}
+  .photo-tall{aspect-ratio:4/3 !important;max-height:70vh}
+}
+/* Phones */
+@media (max-width:560px){
+  .site-footer-grid{grid-template-columns:1fr;gap:28px}
+  .site-nav{column-gap:22px !important;row-gap:0 !important;padding-top:4px !important;padding-bottom:4px !important}
+  .site-nav button{padding:12px 2px !important}
+  .site-footer button{padding:9px 0 !important}
+}
+/* Small or sideways phones: don't pin the (tall) header to the top */
+@media (max-width:560px),(max-height:500px){
+  .site-header{position:relative !important}
+}
+/* Large monitors: scale the whole design up a little */
+@media (min-width:1700px){#dc-root{zoom:1.12}}
+@media (min-width:2200px){#dc-root{zoom:1.3}}
+
 </style>
 
 <script src="vendor/react.production.min.js"></script>
@@ -168,14 +192,14 @@ a:hover{color:var(--pecan-700);text-decoration-color:currentColor}
 <!-- @template name="Bakery website" description="Sarah McGuire Baked Goods site: home, menu & prices, about, pickup & FAQ, contact, order request" -->
 <helmet><script src="design-system.js"></script><style>html{scroll-behavior:auto}body{margin:0;background:var(--bg-page)}a{color:var(--southern-pecan)}a:hover{color:var(--pecan-700)}</style></helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column;background:var(--bg-page);color:var(--text-body);font-family:var(--font-body)">
-<header style="position:sticky;top:0;z-index:30;background:rgba(248,242,231,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line-hair)">
+<header class="site-header" style="position:sticky;top:0;z-index:30;background:rgba(248,242,231,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line-hair)">
 <sc-if value="{{ showAnnouncement }}" hint-placeholder-val="{{ true }}"><div style="background:var(--olive-700);color:var(--creamed-butter);text-align:center;font-size:17px;padding:8px 16px;line-height:1.35">Custom cakes need about two weeks' notice. Everyday bakes, three days.</div></sc-if>
 <div style="max-width:1180px;margin:0 auto;padding:18px 24px 0;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px">
 <div></div>
 <button sc-camel-on-click="{{ goHome }}" aria-label="Sarah McGuire Baked Goods, home" style="background:none;border:none;cursor:pointer;padding:0;display:flex"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Logo" variant="wordmark" base="assets/logo/" width="{{ 210 }}" hint-size="210px,52px"></x-import></button>
 <div style="display:flex;justify-content:flex-end"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.IconButton" icon="shopping-bag" label="Your box" badge="{{ boxBadge }}" sc-camel-on-click="{{ goOrder }}" hint-size="40px,40px"></x-import></div>
 </div>
-<nav style="max-width:1180px;margin:0 auto;padding:10px 24px 12px;box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:center;column-gap:36px;row-gap:4px">
+<nav class="site-nav" style="max-width:1180px;margin:0 auto;padding:10px 24px 12px;box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:center;column-gap:36px;row-gap:4px">
 <sc-for list="{{ nav }}" as="l" hint-placeholder-count="4">
 <sc-if value="{{ l.active }}"><button sc-camel-on-click="{{ l.onClick }}" style="background:none;border:none;cursor:pointer;padding:6px 0;font-family:var(--font-caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-strong);border-bottom:1px solid var(--southern-pecan)">{{ l.label }}</button></sc-if>
 <sc-if value="{{ l.inactive }}" hint-placeholder-val="{{ true }}"><button sc-camel-on-click="{{ l.onClick }}" style="background:none;border:none;cursor:pointer;padding:6px 0;font-family:var(--font-caps);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid transparent" style-hover="color:var(--text-strong)">{{ l.label }}</button></sc-if>
@@ -190,16 +214,16 @@ a:hover{color:var(--pecan-700);text-decoration-color:currentColor}
 <sc-if value="{{ isContact }}"><dc-import name="SiteContact" go="{{ go }}" hint-size="100%,900px"></dc-import></sc-if>
 <sc-if value="{{ isOrder }}"><dc-import name="SiteOrder" go="{{ go }}" items="{{ everyday }}" box="{{ box }}" set-qty="{{ setQty }}" clear-box="{{ clearBox }}" start-custom="{{ startCustom }}" offer-delivery="{{ offerDelivery }}" hint-size="100%,1400px"></dc-import></sc-if>
 </main>
-<footer style="background:var(--southern-pecan);color:var(--creamed-butter);margin-top:96px">
-<div style="max-width:1180px;margin:0 auto;padding:56px 24px 32px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:36px">
+<footer class="site-footer" style="background:var(--southern-pecan);color:var(--creamed-butter);margin-top:96px">
+<div class="site-footer-grid" style="max-width:1180px;margin:0 auto;padding:56px 24px 32px;box-sizing:border-box;display:grid;gap:36px">
 <div><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Logo" color="cream" base="assets/logo/" width="{{ 190 }}" hint-size="190px,130px"></x-import></div>
-<div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:var(--font-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:10px">Order</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:10px">Order</div>
 <button sc-camel-on-click="{{ goMenu }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left" style-hover="text-decoration:underline">Menu &amp; prices</button>
 <button sc-camel-on-click="{{ goOrder }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left" style-hover="text-decoration:underline">Request an order</button>
 <button sc-camel-on-click="{{ goPickup }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left" style-hover="text-decoration:underline">Pickup &amp; FAQ</button></div>
-<div><div style="font-family:var(--font-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:14px">Pickup</div><div style="font-size:18px;line-height:1.6">Midtown Tulsa, Oklahoma<br>Thursday – Saturday<br>10am – 6pm</div></div>
-<div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:var(--font-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:10px">Say hello</div>
-<div style="display:flex;align-items:center;gap:10px;font-size:18px;padding:3px 0"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="mail" size="{{ 18 }}" hint-size="18px,18px"></x-import><span>hello@sarahmcguirebakes.com</span></div>
+<div><div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:14px">Pickup</div><div style="font-size:18px;line-height:1.6">Midtown Tulsa, Oklahoma<br>Thursday – Saturday<br>10am – 6pm</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--honey-300);margin-bottom:10px">Say hello</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:18px;padding:3px 0"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="mail" size="{{ 18 }}" hint-size="18px,18px"></x-import><span style="overflow-wrap:anywhere;min-width:0">hello@sarahmcguirebakes.com</span></div>
 <div style="display:flex;align-items:center;gap:10px;font-size:18px;padding:3px 0"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="instagram" size="{{ 18 }}" hint-size="18px,18px"></x-import><span>@sarahmcguirebakes</span></div>
 <button sc-camel-on-click="{{ goContact }}" style="background:none;border:none;padding:3px 0;color:var(--creamed-butter);font-family:var(--font-body);font-size:18px;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px">Send a message</button></div>
 </div>

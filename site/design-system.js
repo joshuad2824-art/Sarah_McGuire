@@ -101,7 +101,7 @@ function MenuItem({
   }, name), note && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-subhead)',
-      fontSize: 10,
+      fontSize: 11,
       letterSpacing: '.2em',
       textTransform: 'uppercase',
       color: 'var(--text-accent)'
@@ -157,7 +157,7 @@ function Badge({
       background: bg,
       color: fg,
       fontFamily: 'var(--font-subhead)',
-      fontSize: 10,
+      fontSize: 11,
       fontWeight: 500,
       letterSpacing: '.2em',
       textTransform: 'uppercase',
@@ -211,7 +211,7 @@ function Divider({
       lineHeight: 1
     } : {
       fontFamily: 'var(--font-subhead)',
-      fontSize: 11,
+      fontSize: 12,
       letterSpacing: 'var(--ls-eyebrow)',
       textTransform: 'uppercase',
       color: 'var(--text-muted)'
@@ -348,14 +348,17 @@ function Button({
       alignItems: 'center',
       justifyContent: 'center',
       gap: 10,
-      height: s.h,
-      padding: '0 ' + s.px + 'px',
+      minHeight: s.h,
+      maxWidth: '100%',
+      padding: '6px ' + s.px + 'px',
+      boxSizing: 'border-box',
+      textAlign: 'center',
+      lineHeight: 1.25,
       fontFamily: 'var(--font-subhead)',
       fontSize: s.fs,
       fontWeight: 500,
       letterSpacing: 'var(--ls-button)',
       textTransform: 'uppercase',
-      whiteSpace: 'nowrap',
       background: h && !disabled ? v.bgH : v.bg,
       color: v.fg,
       border: '1px solid ' + v.bd,
@@ -465,13 +468,15 @@ function ProductCard({
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
+      flexWrap: 'wrap',
       alignItems: 'baseline',
       justifyContent: 'space-between',
-      gap: 12
+      gap: '4px 12px'
     }
   }, /*#__PURE__*/React.createElement("h4", {
     onClick: onClick,
     style: {
+      flex: '1 1 150px',
       margin: 0,
       fontFamily: 'var(--font-heading)',
       fontSize: 25,
@@ -682,7 +687,7 @@ function Dialog({
   }), eyebrow && /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'var(--font-subhead)',
-      fontSize: 11,
+      fontSize: 12,
       letterSpacing: 'var(--ls-eyebrow)',
       textTransform: 'uppercase',
       color: 'var(--text-muted)',
@@ -767,7 +772,7 @@ function Toast({
       color: 'inherit',
       cursor: 'pointer',
       fontFamily: 'var(--font-subhead)',
-      fontSize: 11,
+      fontSize: 12,
       letterSpacing: '.22em',
       textTransform: 'uppercase',
       textDecoration: 'underline',
@@ -969,7 +974,7 @@ function Input({
   }, label && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-subhead)',
-      fontSize: 11,
+      fontSize: 12,
       letterSpacing: '.22em',
       textTransform: 'uppercase',
       color: 'var(--text-muted)'
@@ -1167,7 +1172,7 @@ function Select({
   }, label && /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--font-subhead)',
-      fontSize: 11,
+      fontSize: 12,
       letterSpacing: '.22em',
       textTransform: 'uppercase',
       color: 'var(--text-muted)'

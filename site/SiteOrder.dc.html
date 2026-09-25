@@ -39,11 +39,11 @@
 <div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px">2 · Something custom</div>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Checkbox" label="I'd like a custom order" description="Celebration cakes, decorated cookies, cupcakes or a dessert table" checked="{{ custom }}" onChange="{{ setCustom }}" hint-size="100%,52px"></x-import>
 <sc-if value="{{ custom }}"><div style="display:flex;flex-direction:column;gap:20px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line-hair)">
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:20px">
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Select" label="What would you like?" options="{{ kinds }}" value="{{ kind }}" onChange="{{ setKind }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Select" label="Occasion" options="{{ occasions }}" value="{{ occasion }}" onChange="{{ setOccasion }}" hint-size="100%,78px"></x-import>
 </div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:20px">
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="How many people?" type="number" min="{{ 1 }}" placeholder="e.g. 20" onChange="{{ setGuests }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Flavors" placeholder="e.g. lemon with honey buttercream" onChange="{{ setFlavors }}" hint-size="100%,78px"></x-import>
 </div>
@@ -56,7 +56,7 @@
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Radio" name="method" label="Porch pickup in Midtown Tulsa" description="Free. Thursday – Saturday. The address comes with your confirmation." checked="{{ isPickup }}" onChange="{{ pickPickup }}" hint-size="100%,52px"></x-import>
 <sc-if value="{{ offerDelivery }}" hint-placeholder-val="{{ true }}"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Radio" name="method" label="Local delivery, $8" description="Friday & Saturday, within about 10 miles of Midtown." checked="{{ isDelivery }}" onChange="{{ pickDelivery }}" hint-size="100%,52px"></x-import></sc-if>
 </div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line-hair)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:20px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line-hair)">
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Date needed" type="date" min="{{ minDate }}" onChange="{{ setDate }}" error="{{ dateError }}" hint="{{ dateHint }}" hint-size="100%,100px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Select" label="Time" options="{{ windows }}" value="{{ window }}" onChange="{{ setWindow }}" hint-size="100%,78px"></x-import>
 </div>
@@ -64,7 +64,7 @@
 </div>
 <div style="background:var(--cream-0);border-radius:8px;box-shadow:var(--shadow-1);padding:28px 32px">
 <div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px">4 · Your details</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:20px">
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Name" onChange="{{ setName }}" error="{{ nameError }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Email" type="email" onChange="{{ setEmail }}" error="{{ emailError }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Phone" type="tel" onChange="{{ setPhone }}" hint="Optional, for pickup-day texts" hint-size="100%,100px"></x-import>
