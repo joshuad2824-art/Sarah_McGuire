@@ -74,7 +74,7 @@ Each page has its own address, so links and the browser's back button work: `/` 
 
 The site adapts to phones, tablets, laptops and large monitors. It was checked at widths from 320px (small phones) to 2560px (large monitors). The size rules live in the `Screen sizes` block of the stylesheet in `site/index.html`:
 
-- **Phones (560px and narrower):** the header scrolls away instead of staying pinned, which also applies to phones held sideways. The menu and footer links get larger tap areas, and the footer stacks into one column.
+- **Phones (560px and narrower):** the menu collapses into a drop-down behind a menu button (☰) on the left of the header. It closes when you pick a page, tap outside it or press Escape, and the current page is highlighted. The header scrolls away instead of staying pinned, which also applies to phones held sideways. Footer links get larger tap areas, and the footer stacks into one column.
 - **Tablets (900px and narrower):** the footer uses two columns, and the tall photo boxes on Home and About become landscape (4:3) once they stack.
 - **Large monitors (1700px and wider):** the whole design scales up a little (by 12%, or 30% from 2200px), so it doesn't look small on a big screen.
 
