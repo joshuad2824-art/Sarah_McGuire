@@ -25,7 +25,8 @@
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Your name" onChange="{{ setName }}" error="{{ nameError }}" hint-size="100%,78px"></x-import><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Email" type="email" onChange="{{ setEmail }}" error="{{ emailError }}" hint-size="100%,78px"></x-import></div>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Select" label="About" options="{{ topics }}" value="{{ topic }}" onChange="{{ setTopic }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Message" multiline="{{ true }}" rows="{{ 5 }}" onChange="{{ setMsg }}" error="{{ msgError }}" hint-size="100%,170px"></x-import>
-<div><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" onClick="{{ send }}" hint-size="180px,56px">Send message</x-import></div>
+<div><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" disabled="{{ sending }}" onClick="{{ send }}" hint-size="180px,56px">{{ sendLabel }}</x-import></div>
+<sc-if value="{{ sendError }}"><p role="alert" style="margin:0;font-size:17px;color:var(--status-error)">{{ sendError }}</p></sc-if>
 </div></sc-if>
 <sc-if value="{{ sent }}"><div style="text-align:center;padding:24px 0">
 <div style="font-family:var(--font-script);font-size:64px;line-height:1;color:var(--rose-700)">thank you</div>
@@ -39,17 +40,25 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;go&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(page:string)=&gt;void&quot;}}">
 class Component extends DCLogic{
-  state={sent:false,tried:false,name:'',email:'',msg:'',topic:'A question about an order'};
+  state={sent:false,sending:false,sendError:'',tried:false,name:'',email:'',msg:'',topic:'A question about an order'};
   renderVals(){
     const go=this.props.go||(()=>{}),s=this.state;
     const errs={name:!s.name.trim()?'Please add your name':'',email:!/.+@.+\..+/.test(s.email)?'Please add an email I can reply to':'',msg:!s.msg.trim()?'Please write a short message':''};
     return {
       sent:s.sent,notSent:!s.sent,email:s.email,
+      sending:s.sending,sendLabel:s.sending?'Sending…':'Send message',sendError:s.sendError,
       topics:['A question about an order','A custom cake idea','An event or large order','Something else'],topic:s.topic,
       setTopic:v=>this.setState({topic:v}),
       setName:e=>this.setState({name:e.target.value}),setEmail:e=>this.setState({email:e.target.value}),setMsg:e=>this.setState({msg:e.target.value}),
       nameError:s.tried?errs.name:'',emailError:s.tried?errs.email:'',msgError:s.tried?errs.msg:'',
-      send:()=>{if(errs.name||errs.email||errs.msg)this.setState({tried:true});else this.setState({sent:true});},
+      send:()=>{
+        if(errs.name||errs.email||errs.msg){this.setState({tried:true});return;}
+        if(s.sending)return;
+        this.setState({sending:true,sendError:''});
+        window.submitNetlifyForm('contact',{name:s.name.trim(),email:s.email.trim(),topic:s.topic,message:s.msg.trim()})
+          .then(()=>this.setState({sent:true,sending:false}))
+          .catch(()=>this.setState({sending:false,sendError:"Sorry, that didn't go through. Please try again, or email hello@sarahmcguirebakes.com."}));
+      },
       goHome:()=>go('home')
     };
   }

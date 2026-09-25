@@ -159,6 +159,7 @@ a:hover{color:var(--pecan-700);text-decoration-color:currentColor}
 <script src="vendor/react.production.min.js"></script>
 <script src="vendor/react-dom.production.min.js"></script>
 <script src="support.js"></script>
+<script src="forms.js"></script>
 </head>
 <body>
 
@@ -206,6 +207,20 @@ a:hover{color:var(--pecan-700);text-decoration-color:currentColor}
 <sc-if value="{{ toast }}"><div style="position:fixed;left:0;right:0;bottom:28px;z-index:50;display:flex;justify-content:center;padding:0 16px;pointer-events:none"><div style="pointer-events:auto"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Toast" tone="success" action="View box" sc-camel-on-action="{{ goOrder }}" sc-camel-on-close="{{ hideToast }}" hint-size="320px,56px">{{ toast }}</x-import></div></div></sc-if>
 </div>
 </x-dc>
+
+<!-- Netlify Forms: hidden copies of the Order and Contact forms. Netlify reads
+     these at deploy time to set up the forms; the visible forms on the Order and
+     Contact pages submit to them through forms.js. If you add a field to either
+     form, add a matching input here too. -->
+<form name="order" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field"><input name="name"><input name="email"><input name="phone">
+  <textarea name="items"></textarea><input name="custom-order"><input name="custom-kind"><input name="occasion">
+  <input name="guests"><input name="flavors"><textarea name="design"></textarea>
+  <input name="method"><input name="date"><input name="time"><textarea name="address"></textarea><input name="estimated-total">
+</form>
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field"><input name="name"><input name="email"><input name="topic"><textarea name="message"></textarea>
+</form>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;showAnnouncement&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Site&quot;},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;photo&quot;,&quot;logo&quot;],&quot;default&quot;:&quot;photo&quot;,&quot;tsType&quot;:&quot;'photo'|'logo'&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;offerDelivery&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Ordering&quot;}}">
 // Everyday menu — edit names, prices and units here. Custom-order pricing lives in SiteMenu.dc.html.
 const EVERYDAY=[
@@ -216,13 +231,24 @@ const EVERYDAY=[
 {id:'apple',name:'Lattice Apple Pie',price:32,unit:'9-inch pie',desc:'Tart apples, brown sugar, cinnamon'},
 {id:'banana',name:'Banana Bread',price:14,unit:'loaf',desc:'Very ripe bananas, crackly sugar top'}
 ];
+// Each page has its own address (#menu, #pickup, ...), so links and the back button work.
+const PAGES={home:'',menu:'Menu & Prices',pickup:'Pickup & FAQ',about:'About',contact:'Contact',order:'Request an Order'};
+const SITE_NAME='Sarah McGuire Baked Goods';
+const pageFromHash=()=>{const h=decodeURIComponent(location.hash.slice(1));return Object.prototype.hasOwnProperty.call(PAGES,h)?h:'home';};
+const setTitle=page=>{document.title=PAGES[page]?PAGES[page]+' · '+SITE_NAME:SITE_NAME;};
 class Component extends DCLogic{
-  state={page:'home',box:{},toast:null,startCustom:false};
-  go=(page,opts)=>{this.setState({page,startCustom:!!(opts&&opts.custom),toast:null});window.scrollTo(0,0);};
+  state={page:pageFromHash(),box:{},toast:null,startCustom:false};
+  go=(page,opts)=>{
+    if(page!==this.state.page)history.pushState(null,'',page==='home'?location.pathname+location.search:'#'+page);
+    setTitle(page);
+    this.setState({page,startCustom:!!(opts&&opts.custom),toast:null});window.scrollTo(0,0);
+  };
+  onNav=()=>{const page=pageFromHash();setTitle(page);if(page!==this.state.page){this.setState({page,startCustom:false,toast:null});window.scrollTo(0,0);}};
+  componentDidMount(){setTitle(this.state.page);window.addEventListener('popstate',this.onNav);window.addEventListener('hashchange',this.onNav);}
   add=(id)=>{this.setState(s=>({box:{...s.box,[id]:(s.box[id]||0)+1},toast:'Added to your box'}));clearTimeout(this.t);this.t=setTimeout(()=>this.setState({toast:null}),3500);};
   setQty=(id,n)=>this.setState(s=>{const b={...s.box};if(n<=0)delete b[id];else b[id]=n;return{box:b};});
   clearBox=()=>this.setState({box:{}});
-  componentWillUnmount(){clearTimeout(this.t);}
+  componentWillUnmount(){clearTimeout(this.t);window.removeEventListener('popstate',this.onNav);window.removeEventListener('hashchange',this.onNav);}
   renderVals(){
     const p=this.state.page;
     const count=Object.values(this.state.box).reduce((a,b)=>a+b,0);

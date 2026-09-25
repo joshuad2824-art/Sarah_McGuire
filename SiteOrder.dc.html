@@ -44,10 +44,10 @@
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Select" label="Occasion" options="{{ occasions }}" value="{{ occasion }}" onChange="{{ setOccasion }}" hint-size="100%,78px"></x-import>
 </div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
-<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="How many people?" type="number" min="{{ 1 }}" placeholder="e.g. 20" hint-size="100%,78px"></x-import>
-<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Flavors" placeholder="e.g. lemon with honey buttercream" hint-size="100%,78px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="How many people?" type="number" min="{{ 1 }}" placeholder="e.g. 20" onChange="{{ setGuests }}" hint-size="100%,78px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Flavors" placeholder="e.g. lemon with honey buttercream" onChange="{{ setFlavors }}" hint-size="100%,78px"></x-import>
 </div>
-<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Design & colors" multiline="{{ true }}" rows="{{ 4 }}" placeholder="Tell Sarah about the look you have in mind." hint="Have photos or inspiration? Reply to your confirmation email with them." hint-size="100%,160px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Design & colors" multiline="{{ true }}" rows="{{ 4 }}" placeholder="Tell Sarah about the look you have in mind." onChange="{{ setDesign }}" hint="Have photos or inspiration? Reply to your confirmation email with them." hint-size="100%,160px"></x-import>
 </div></sc-if>
 </div>
 <div style="background:var(--cream-0);border-radius:8px;box-shadow:var(--shadow-1);padding:28px 32px">
@@ -67,7 +67,7 @@
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Name" onChange="{{ setName }}" error="{{ nameError }}" hint-size="100%,78px"></x-import>
 <x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Email" type="email" onChange="{{ setEmail }}" error="{{ emailError }}" hint-size="100%,78px"></x-import>
-<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Phone" type="tel" hint="Optional, for pickup-day texts" hint-size="100%,100px"></x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Input" label="Phone" type="tel" onChange="{{ setPhone }}" hint="Optional, for pickup-day texts" hint-size="100%,100px"></x-import>
 </div>
 </div>
 </div>
@@ -77,8 +77,9 @@
 <sc-if value="{{ summaryEmpty }}"><p style="margin:4px 0 0;font-size:18px;font-style:italic;color:var(--text-muted)">Nothing added yet.</p></sc-if>
 <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0 4px"><span style="font-family:var(--font-caps);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-strong)">{{ totalLabel }}</span><span style="font-size:30px;font-weight:600;color:var(--text-strong)">{{ total }}</span></div>
 <p style="margin:0 0 20px;font-size:16px;font-style:italic;color:var(--text-muted)">{{ totalNote }}</p>
-<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" fullWidth="{{ true }}" onClick="{{ send }}" hint-size="100%,56px">Send request</x-import>
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" fullWidth="{{ true }}" disabled="{{ sending }}" onClick="{{ send }}" hint-size="100%,56px">{{ sendLabel }}</x-import>
 <sc-if value="{{ formError }}"><p style="margin:14px 0 0;font-size:16px;color:var(--status-error)">{{ formError }}</p></sc-if>
+<sc-if value="{{ sendError }}"><p role="alert" style="margin:14px 0 0;font-size:16px;color:var(--status-error)">{{ sendError }}</p></sc-if>
 <p style="margin:16px 0 0;font-size:16px;line-height:1.45">Nothing is charged today. Sarah replies within a day with a confirmation and an invoice.</p>
 </aside>
 </div>
@@ -89,7 +90,7 @@
 const pad=n=>String(n).padStart(2,'0');
 const isoIn=d=>{const t=new Date();t.setDate(t.getDate()+d);return t.getFullYear()+'-'+pad(t.getMonth()+1)+'-'+pad(t.getDate());};
 class Component extends DCLogic{
-  state={custom:!!this.props.startCustom,method:'pickup',kind:'Celebration cake',occasion:'Birthday',window:'Morning, 10am – 12pm',date:'',address:'',name:'',email:'',tried:false,sent:false};
+  state={custom:!!this.props.startCustom,method:'pickup',kind:'Celebration cake',occasion:'Birthday',window:'Morning, 10am – 12pm',date:'',address:'',name:'',email:'',phone:'',guests:'',flavors:'',design:'',tried:false,sending:false,sendError:'',sent:false};
   componentDidUpdate(prev){if(this.props.startCustom&&!prev.startCustom&&!this.state.custom)this.setState({custom:true});}
   renderVals(){
     const s=this.state,go=this.props.go||(()=>{}),setQty=this.props.setQty||(()=>{});
@@ -112,7 +113,7 @@ class Component extends DCLogic{
     const bad=Object.values(errs).some(Boolean);
     const t=s.tried;
     return {
-      sent:s.sent,notSent:!s.sent,firstName:(s.name.trim().split(' ')[0]||'friend'),email:s.email,
+      sent:s.sent,notSent:!s.sent,sending:s.sending,sendLabel:s.sending?'Sending…':'Send request',sendError:s.sendError,firstName:(s.name.trim().split(' ')[0]||'friend'),email:s.email,
       lines,hasItems:lines.length>0,noItems:!lines.length,
       custom:s.custom,setCustom:v=>this.setState({custom:v}),
       kinds:['Celebration cake','Decorated cookies','Custom cupcakes','Dessert table','Something else'],kind:s.kind,setKind:v=>this.setState({kind:v}),
@@ -122,14 +123,30 @@ class Component extends DCLogic{
       windows:['Morning, 10am – 12pm','Midday, 12 – 3pm','Afternoon, 3 – 6pm'],window:s.window,setWindow:v=>this.setState({window:v}),
       minDate,dateHint:s.custom?'At least two weeks from today':'At least three days from today',
       setDate:e=>this.setState({date:e.target.value}),setAddress:e=>this.setState({address:e.target.value}),
-      setName:e=>this.setState({name:e.target.value}),setEmail:e=>this.setState({email:e.target.value}),
+      setName:e=>this.setState({name:e.target.value}),setEmail:e=>this.setState({email:e.target.value}),setPhone:e=>this.setState({phone:e.target.value}),
+      setGuests:e=>this.setState({guests:e.target.value}),setFlavors:e=>this.setState({flavors:e.target.value}),setDesign:e=>this.setState({design:e.target.value}),
       dateError:t?errs.date:'',addressError:t?errs.address:'',nameError:t?errs.name:'',emailError:t?errs.email:'',
       formError:t&&bad?(errs.items||'Please check the highlighted fields.'):'',
       summary,summaryEmpty:!summary.length,
       totalLabel:s.custom?'Estimate so far':'Estimated total',
       total:'$'+(subtotal+(summary.length?fee:0)),
       totalNote:s.custom?'Sarah will quote your custom order when she confirms.':'Final total is confirmed on your invoice.',
-      send:()=>{if(bad){this.setState({tried:true});return;}this.setState({sent:true});(this.props.clearBox||(()=>{}))();window.scrollTo(0,0);},
+      send:()=>{
+        if(bad){this.setState({tried:true});return;}
+        if(s.sending)return;
+        this.setState({sending:true,sendError:''});
+        window.submitNetlifyForm('order',{
+          name:s.name.trim(),email:s.email.trim(),phone:s.phone.trim(),
+          items:lines.map(l=>l.qty+' × '+l.name+' ('+l.each+') = '+l.total).join('\n')||'None',
+          'custom-order':s.custom?'Yes':'No',
+          'custom-kind':s.custom?s.kind:'',occasion:s.custom?s.occasion:'',
+          guests:s.custom?s.guests:'',flavors:s.custom?s.flavors.trim():'',design:s.custom?s.design.trim():'',
+          method:method==='delivery'?'Local delivery':'Porch pickup',
+          date:s.date,time:s.window,address:method==='delivery'?s.address.trim():'',
+          'estimated-total':'$'+(subtotal+(summary.length?fee:0))+(s.custom?' plus custom quote':'')
+        }).then(()=>{this.setState({sent:true,sending:false});(this.props.clearBox||(()=>{}))();window.scrollTo(0,0);})
+          .catch(()=>this.setState({sending:false,sendError:"Sorry, your request didn't go through. Please try again, or email hello@sarahmcguirebakes.com."}));
+      },
       goMenu:()=>go('menu'),goHome:()=>go('home')
     };
   }
