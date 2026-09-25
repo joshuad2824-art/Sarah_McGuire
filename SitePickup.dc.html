@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<div data-screen-label="Pickup & FAQ">
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 0;box-sizing:border-box">
+<div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--text-muted)">Pickup &amp; FAQ</div>
+<h1 style="font-size:clamp(44px,5.5vw,62px);line-height:1.05;font-weight:500;letter-spacing:-.01em;margin:16px 0 36px;color:var(--text-strong)">Getting your order home.</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+<div style="background:var(--cream-0);border-radius:8px;box-shadow:var(--shadow-1);padding:32px">
+<div style="display:flex;align-items:center;gap:10px;color:var(--text-brand)"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="map-pin" size="{{ 20 }}" hint-size="20px,20px"></x-import><span style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase">Porch pickup · Free</span></div>
+<h2 style="font-size:32px;margin:14px 0 10px">Midtown Tulsa</h2>
+<p style="margin:0 0 18px;font-size:19px">Your order waits in a cooler on my porch, boxed and labeled with your name. The address and pickup window come with your confirmation email.</p>
+<div style="display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:18px;padding-top:16px;border-top:1px solid var(--line-hair)"><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.22em;color:var(--text-muted);padding-top:4px">DAYS</span><span>Thursday – Saturday</span><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.22em;color:var(--text-muted);padding-top:4px">HOURS</span><span>10am – 6pm</span></div>
+</div>
+<sc-if value="{{ offerDelivery }}" hint-placeholder-val="{{ true }}"><div style="background:var(--cream-0);border-radius:8px;box-shadow:var(--shadow-1);padding:32px">
+<div style="display:flex;align-items:center;gap:10px;color:var(--text-brand)"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Icon" name="truck" size="{{ 20 }}" hint-size="20px,20px"></x-import><span style="font-family:var(--font-caps);font-size:12px;letter-spacing:.26em;text-transform:uppercase">Local delivery · $8</span></div>
+<h2 style="font-size:32px;margin:14px 0 10px">Around Tulsa</h2>
+<p style="margin:0 0 18px;font-size:19px">I deliver within about 10 miles of Midtown. Tiered cakes are always delivered, so they arrive in one piece.</p>
+<div style="display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:18px;padding-top:16px;border-top:1px solid var(--line-hair)"><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.22em;color:var(--text-muted);padding-top:4px">DAYS</span><span>Friday &amp; Saturday</span><span style="font-family:var(--font-caps);font-size:11px;letter-spacing:.22em;color:var(--text-muted);padding-top:4px">WINDOW</span><span>A two-hour window, agreed ahead</span></div>
+</div></sc-if>
+</div>
+</section>
+<section style="max-width:1180px;margin:80px auto 0;padding:0 24px;box-sizing:border-box">
+<x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Divider" label="Questions" spacing="{{ 0 }}" hint-size="100%,24px"></x-import>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px 64px;margin-top:40px">
+<div><h3 style="font-size:25px;margin:0 0 8px">How far ahead should I order?</h3><p style="margin:0;font-size:19px">Three days for everyday bakes. For custom cakes and cookies, please give at least two weeks. Spring and the holidays fill up faster.</p></div>
+<div><h3 style="font-size:25px;margin:0 0 8px">How do I pay?</h3><p style="margin:0;font-size:19px">After I confirm your order, I'll email you an invoice you can pay by card. Custom orders need a 50% deposit to hold the date.</p></div>
+<div><h3 style="font-size:25px;margin:0 0 8px">Can you work around allergies?</h3><p style="margin:0;font-size:19px">I can leave out nuts or make some recipes dairy-free, but my kitchen handles wheat, dairy, eggs and nuts every day. I can't promise anything is allergen-free.</p></div>
+<div><h3 style="font-size:25px;margin:0 0 8px">What if I need to change or cancel?</h3><p style="margin:0;font-size:19px">Changes are fine up to three days before your date. Deposits can move to a new date once, but they aren't refundable.</p></div>
+<div><h3 style="font-size:25px;margin:0 0 8px">Can I send a picture for my cake?</h3><p style="margin:0;font-size:19px">Please do. Reply to your confirmation email with photos or a Pinterest board, and I'll make it my own.</p></div>
+<div><h3 style="font-size:25px;margin:0 0 8px">Do you ship?</h3><p style="margin:0;font-size:19px">Not yet. Everything is baked for pickup or delivery around Tulsa, so it arrives the way it should.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:56px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" onClick="{{ goOrder }}" hint-size="200px,56px">Request an order</x-import><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" variant="outline" onClick="{{ goContact }}" hint-size="200px,56px">Ask a question</x-import></div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;go&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(page:string)=&gt;void&quot;},&quot;offerDelivery&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic{
+  renderVals(){const go=this.props.go||(()=>{});return {offerDelivery:this.props.offerDelivery??true,goOrder:()=>go('order'),goContact:()=>go('contact')};}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<div data-screen-label="About">
+<section style="max-width:1180px;margin:0 auto;padding:64px 24px 0;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+<div style="flex:1 1 360px;min-width:0"><div style="background:var(--cream-200);border-radius:24px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden"><img src="assets/logo/mark-dusty-rose.png" alt="" style="height:30%;opacity:.55"><span style="position:absolute;bottom:20px;left:0;right:0;text-align:center;font-family:var(--font-caps);font-size:11px;letter-spacing:.24em;color:var(--text-muted)">PHOTO · THE KITCHEN</span></div></div>
+<div style="flex:1.1 1 420px;min-width:0">
+<div style="font-family:var(--font-caps);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--text-muted)">About</div>
+<h1 style="font-size:clamp(44px,5.5vw,62px);line-height:1.05;font-weight:500;letter-spacing:-.01em;margin:16px 0 20px;color:var(--text-strong)">One kitchen, one baker.</h1>
+<p style="margin:0 0 16px;font-size:21px;line-height:1.55">I'm Sarah, and I bake everything on this site myself, from a small kitchen in Tulsa. Every order is mixed, baked, decorated and boxed by hand.</p>
+<p style="margin:0 0 8px;font-size:21px;line-height:1.55">I keep the menu short so I can take my time with each order, especially the custom cakes.</p>
+<div style="font-family:var(--font-script);font-size:52px;line-height:1.2;color:var(--rose-700)">Sarah</div>
+</div>
+</section>
+<section style="max-width:1180px;margin:80px auto 0;padding:0 24px;box-sizing:border-box">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+<div style="background:var(--surface-sunken);border-radius:8px;padding:28px 28px 30px"><h3 style="font-size:26px;margin:0 0 6px">Real butter, always</h3><p style="margin:0;font-size:18px">No shortening and no mixes. Just butter, sugar, flour and eggs.</p></div>
+<div style="background:var(--surface-sunken);border-radius:8px;padding:28px 28px 30px"><h3 style="font-size:26px;margin:0 0 6px">Oklahoma ingredients</h3><p style="margin:0;font-size:18px">Pecans, honey and eggs from nearby farms whenever I can get them.</p></div>
+<div style="background:var(--surface-sunken);border-radius:8px;padding:28px 28px 30px"><h3 style="font-size:26px;margin:0 0 6px">Baked for your date</h3><p style="margin:0;font-size:18px">Everything is baked a day or two before pickup, never ahead and frozen.</p></div>
+</div>
+<div style="display:flex;justify-content:center;margin-top:48px"><x-import component-from-global-scope="SarahMcGuireDesignSystem_65167b.Button" size="lg" onClick="{{ goMenu }}" hint-size="180px,56px">See the menu</x-import></div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;go&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(page:string)=&gt;void&quot;}}">
+class Component extends DCLogic{
+  renderVals(){const go=this.props.go||(()=>{});return {goMenu:()=>go('menu')};}
+}
+</script>
+</body>
+</html>
