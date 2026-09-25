@@ -32,14 +32,25 @@ The root component in `index.html` has three switches, each with its default in 
 - `heroStyle` (`'photo'` or `'logo'`): shows a photo slot or the full logo on the home page.
 - `offerDelivery` (default `true`): turns the local delivery option on or off across the site.
 
-## Forms (not live yet)
+## Forms
 
-The **Order request** and **Contact** forms check their fields and show a thank-you message, but **they don't send anything yet**. Before the site goes live they need to be connected to something that delivers the message, such as [Netlify Forms](https://docs.netlify.com/forms/setup/) or an email service.
+The **Order request** and **Contact** forms send to [Netlify Forms](https://docs.netlify.com/forms/setup/). Each one shows its thank-you message only after Netlify accepts the submission; if sending fails, the visitor sees an error that points them to the email address instead.
+
+- **Reading submissions:** Netlify dashboard → the site → **Forms** → `order` or `contact`.
+- **Getting them by email:** Netlify dashboard → **Project configuration → Notifications → Emails and webhooks → Form submission notifications**. Add Sarah's email address there.
+- **Adding or renaming a field:** Netlify learns the fields from the hidden `<form data-netlify="true">` copies near the bottom of `index.html`. Any field the page sends (see `send` in `SiteOrder.dc.html` / `SiteContact.dc.html`) must also appear in that hidden copy, or Netlify drops it.
+- Form detection has to be turned on for the site in Netlify (**Forms → Enable form detection**). It is already on for this site.
+- Submitting the forms only works on the deployed site. With a local preview server the page shows the "didn't go through" error, which is expected.
+
+## Page addresses
+
+Each page has its own address, so links and the browser's back button work: `/` (home), `/#menu`, `/#pickup`, `/#about`, `/#contact` and `/#order`. The page names and browser-tab titles are listed in `PAGES` near the bottom of `index.html`.
 
 ## Project layout
 
 ```
-index.html            site shell and root page
+index.html            site shell and root page (also holds the hidden Netlify form copies)
+forms.js              sends the Order and Contact forms to Netlify
 Site*.dc.html         one file per page, loaded by the shell
 support.js            page runtime (generated; don't edit)
 design-system.js      brand components: buttons, cards, logo, icons (generated)
