@@ -1,7 +1,12 @@
-# Plain static site: no build step, publish the repo root.
+# The website lives in site/. The admin API (Netlify Functions) lives in
+# netlify/functions/ and stores edited text and photos in Netlify Blobs.
 [build]
-  publish = "."
+  publish = "site"
   command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/assets/*"

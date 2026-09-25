@@ -1,0 +1,9 @@
+{
+  "name": "sarah-mcguire-baked-goods",
+  "private": true,
+  "type": "module",
+  "description": "Sarah McGuire Baked Goods website: static site in site/, admin API in netlify/functions/",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.1"
+  }
+}
