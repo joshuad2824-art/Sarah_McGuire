@@ -33,9 +33,11 @@ export function adminConfigured() {
   return passphrase() !== null;
 }
 
+// Ignores spaces around the passphrase, which phone keyboards and password
+// managers sometimes add.
 export function checkPassphrase(given) {
   const p = passphrase();
-  return p !== null && typeof given === 'string' && sameText(given, p);
+  return p !== null && typeof given === 'string' && sameText(given.trim(), p.trim());
 }
 
 export function createSession() {
