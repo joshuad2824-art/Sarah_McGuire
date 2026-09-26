@@ -221,7 +221,7 @@
 
   // Login
   function openLogin(message) {
-    var input = el('input', { type: 'password', autocomplete: 'current-password', 'aria-label': 'Passphrase', placeholder: 'Passphrase' });
+    var input = el('input', { type: 'password', autocomplete: 'current-password', autocapitalize: 'off', autocorrect: 'off', spellcheck: 'false', 'aria-label': 'Passphrase', placeholder: 'Passphrase' });
     var msg = el('div', { class: 'smb-msg', role: 'alert', text: message || '' });
     var btn = el('button', { class: 'smb-btn smb-primary', type: 'submit', text: 'Log in' });
     var form = el('form', {}, [el('p', { text: 'Enter the admin passphrase to edit the text and photos on this site.' }), input, msg,
